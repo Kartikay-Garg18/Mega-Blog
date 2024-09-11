@@ -67,12 +67,12 @@ export class DatabaseService {
 
     async getPost(slug){
         try {
-            await this.databases.getDocument(
+            const post = await this.databases.getDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug
             );
-            return true;
+            return post;
         } catch (error) {
             console.log(error);
             return false;

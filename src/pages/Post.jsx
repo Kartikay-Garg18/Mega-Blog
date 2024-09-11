@@ -37,11 +37,12 @@ export default function Post() {
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                    {console.log(post)}
                     <img
                         src={storageService.getFilePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
-                    />
+                        />
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">

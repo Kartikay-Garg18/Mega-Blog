@@ -15,12 +15,12 @@ export class StorageService {
 
     async uploadFile(file){
         try {
-            await this.bucket.createFile(
+            const data = await this.bucket.createFile(
                 config.appwriteBucketId, 
                 ID.unique(),
                 file
             );
-            return true;
+            return data;
         } catch (error) {
             console.log(error);
             return false;

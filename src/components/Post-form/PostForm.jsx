@@ -6,6 +6,7 @@ import storageService from '../../appwrite/storage'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+
 function PostForm({post}) {
     const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
         defaultValues: {
@@ -21,7 +22,7 @@ function PostForm({post}) {
 
     const submit = async (data) => {
         if(post){
-          const file = data.image[0] ? await storageService.uploadFile(data.image[0]) : null
+          const file = data.featuredImage[0] ? await storageService.uploadFile(data.featuredImage[0]) : null
           if(file){
             storageService.deleteFile(post.featuredImage)
           }
@@ -32,7 +33,7 @@ function PostForm({post}) {
             navigate(`/posts/${dbPost.$id}`)
           }
         } else{
-          const file = data.image[0] ? await storageService.uploadFile(data.image[0]) : null
+          const file = data.featuredImage[0] ? (await storageService.uploadFile(data.featuredImage[0])) : null
           if(file){
             const fileID = file.$id
             data.featuredImage = fileID
@@ -57,7 +58,7 @@ function PostForm({post}) {
     React.useEffect(()=>{
       const subscription = watch((value, {name})=>{
         if(name === 'title'){
-          setValue('slug', slugTransform(valuet.title), {shouldValidate: true})
+          setValue('slug', slugTransform(value.title), {shouldValidate: true})
         }
       })
 
@@ -91,7 +92,7 @@ function PostForm({post}) {
                   type="file"
                   className="mb-4"
                   accept="image/png, image/jpg, image/jpeg, image/gif"
-                  {...register("image", { required: !post })}
+                  {...register("featuredImage", { required: !post })}
               />
               {post && (
                   <div className="w-full mb-4">
