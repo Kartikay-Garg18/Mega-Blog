@@ -8,12 +8,11 @@ function Home() {
 
     useEffect(()=>{
 
-        const a = databaseService.getPosts().then((posts)=>{
+        databaseService.getPosts().then((posts)=>{
             if(posts){
                 setPosts(posts.documents);
             }
         })
-        console.log(a)
     }, [])
 
     if(posts.length === 0){
